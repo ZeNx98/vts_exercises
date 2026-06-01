@@ -2405,12 +2405,11 @@ function renderPracticeQ(les, container) {
       </div>
     </div>
     <div class="practice-q">${q.q}</div>
-    ${q.template ? `<div style="padding:10px 18px 0;background:var(--code-bg);font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--muted)">${q.template}</div>` : ''}
-    <textarea class="sql-input" id="sql-input" placeholder="SQL kodunuzu buraya yazın..." spellcheck="false"></textarea>
+    <textarea class="sql-input" id="sql-input" placeholder="SQL kodunuzu buraya yazın..." spellcheck="false" style="min-height: 120px">${q.template || ''}</textarea>
     <div class="feedback" id="feedback"></div>
     <div class="practice-footer">
       <button class="btn btn-primary" onclick="checkPractice()">✓ Kontrol Et</button>
-      <button class="btn btn-reset" onclick="document.getElementById('sql-input').value=''">Temizle</button>
+      <button class="btn btn-reset" onclick="resetPracticeInput()">Temizle</button>
     </div>
   `;
   container.appendChild(area);
@@ -2462,6 +2461,12 @@ function toggleSchema() {
   if (panel) {
     panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
   }
+}
+
+function resetPracticeInput() {
+  const les = MODULES[currentModule].lessons[currentLesson];
+  const q = les.questions[practiceIdx];
+  document.getElementById('sql-input').value = q.template || '';
 }
 
 // ─── QUIZ ────────────────────────────────────────────────────────────────────
