@@ -1270,7 +1270,7 @@ const MODULES = [
         type: 'practice',
         title: 'GROUPING Alıştırması',
         questions: [
-          { q: 'GROUPING(department_id) fonksiyonu hangi değerleri döner?', answer: ['0 veya 1', '0 ve 1', '0 or 1', '1 veya 0'], hint: 'GROUPING fonksiyonu 0 (gerçek veri) veya 1 (toplam satırı) döner', template: 'GROUPING fonksiyonu ' },
+          { q: 'SELECT listesinde department_id için GROUPING değerini getiren fonksiyonu yazın.', answer: ['grouping(department_id)', 'grouping(department_id), job_id, sum(salary) from employees group by rollup(department_id, job_id)'], hint: 'SELECT department_id, GROUPING(department_id), job_id, SUM(salary) FROM employees GROUP BY ROLLUP(department_id, job_id);', template: 'SELECT department_id, ' },
           { q: 'Toplam satırları hariç bırakmak için HAVING koşulunu yazın (department_id ve job_id için).', answer: ['having grouping(department_id) = 0 and grouping(job_id) = 0', 'grouping(department_id) = 0 and grouping(job_id) = 0'], hint: 'HAVING GROUPING(department_id) = 0 AND GROUPING(job_id) = 0', template: 'SELECT department_id, job_id, SUM(salary)\nFROM employees\nGROUP BY ROLLUP(department_id, job_id)\n' },
         ]
       },
@@ -1544,7 +1544,7 @@ const MODULES = [
         title: 'EXISTS / Çoklu Sütun Alıştırması',
         questions: [
           { q: 'En az bir astı olan (yönetici konumundaki) çalışanları getiren <strong>EXISTS</strong> sorgusunu tamamlayın.', answer: ['exists (select 1 from employees where manager_id = e.employee_id)', 'where exists (select 1 from employees where manager_id = e.employee_id)'], hint: 'WHERE EXISTS (SELECT 1 FROM employees WHERE manager_id = e.employee_id)', template: 'SELECT last_name, employee_id\nFROM employees e\n' },
-          { q: 'Birden fazla satır dönebilecek durumda = yerine hangi operatör kullanılmalıdır?', answer: ['in', 'where salary in'], hint: 'IN operatörü hem tek hem çok satır için güvenlidir', template: 'Cevap: ' },
+          { q: "Maaşı, 'IT_PROG' unvanına sahip herhangi bir çalışanın maaşına eşit olan çalışanları getirmek için IN kullanan WHERE koşulunu tamamlayın.", answer: ["in (select salary from employees where job_id = 'it_prog')", "in (select salary from employees where job_id='it_prog')"], hint: "SELECT last_name, salary FROM employees WHERE salary IN (SELECT salary FROM employees WHERE job_id = 'IT_PROG');", template: 'SELECT last_name, salary\nFROM employees\nWHERE salary ' },
         ]
       },
       {
